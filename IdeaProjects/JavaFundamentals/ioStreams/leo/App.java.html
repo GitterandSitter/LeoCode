@@ -1,0 +1,94 @@
+<html>
+<head>
+<title>App.java</title>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+<style type="text/css">
+.s0 { color: #808080;}
+.s1 { color: #a9b7c6;}
+.s2 { color: #cc7832;}
+.s3 { color: #6a8759;}
+.s4 { color: #6897bb;}
+.ln { color: #606366; font-weight: normal; font-style: normal; }
+</style>
+</head>
+<body bgcolor="#2b2b2b">
+<table CELLSPACING=0 CELLPADDING=5 COLS=1 WIDTH="100%" BGCOLOR="#606060" >
+<tr><td><center>
+<font face="Arial, Helvetica" color="#000000">
+App.java</font>
+</center></td></tr></table>
+<pre><span class="s0">//Gecomprimeerd bestand aanmaken</span>
+<a name="l218"><span class="ln">218  </span></a>        <span class="s1">FileOutputStream fos = </span><span class="s2">new </span><span class="s1">FileOutputStream(</span><span class="s3">&quot;myFile.txt&quot;</span><span class="s1">)</span><span class="s2">;</span>
+<a name="l219"><span class="ln">219  </span></a>        <span class="s1">DeflaterOutputStream dos = </span><span class="s2">new </span><span class="s1">DeflaterOutputStream(fos)</span><span class="s2">;</span>
+<a name="l220"><span class="ln">220  </span></a>        <span class="s1">PrintStream ps = </span><span class="s2">new </span><span class="s1">PrintStream(dos)</span><span class="s2">;</span>
+<a name="l221"><span class="ln">221  </span></a>        <span class="s1">FileInputStream fis = </span><span class="s2">null;</span>
+<a name="l222"><span class="ln">222  </span></a>        <span class="s1">InflaterInputStream iis = </span><span class="s2">null;</span>
+<a name="l223"><span class="ln">223  </span></a>
+<a name="l224"><span class="ln">224  </span></a>
+<a name="l225"><span class="ln">225  </span></a>        <span class="s1">ps.println(</span><span class="s4">2022</span><span class="s1">)</span><span class="s2">;</span>
+<a name="l226"><span class="ln">226  </span></a>        <span class="s1">ps.println(</span><span class="s3">&quot;Hallo Java&quot;</span><span class="s1">)</span><span class="s2">;</span>
+<a name="l227"><span class="ln">227  </span></a>        <span class="s1">ps.println(</span><span class="s3">&quot;Dit bestand is gecomprimeerd.&quot;</span><span class="s1">)</span><span class="s2">;</span>
+<a name="l228"><span class="ln">228  </span></a>        <span class="s1">ps.close()</span><span class="s2">;</span>
+<a name="l229"><span class="ln">229  </span></a>        <span class="s1">fos.close()</span><span class="s2">;</span>
+<a name="l230"><span class="ln">230  </span></a>
+<a name="l231"><span class="ln">231  </span></a>
+<a name="l232"><span class="ln">232  </span></a>        <span class="s0">//Decomprimeren en weergeven op de terminal. Bestand &gt; FileInputStream &gt; InflaterInputStream &gt; Nakijken geschiktheid (mark()/reset()-bufferedIOstream)</span>
+<a name="l233"><span class="ln">233  </span></a>        <span class="s0">// &gt; byteArrayOutputStream &gt; byteArray &gt; String</span>
+<a name="l234"><span class="ln">234  </span></a>
+<a name="l235"><span class="ln">235  </span></a>
+<a name="l236"><span class="ln">236  </span></a>        <span class="s2">try </span><span class="s1">{</span>
+<a name="l237"><span class="ln">237  </span></a>
+<a name="l238"><span class="ln">238  </span></a>            <span class="s0">// Creates a FileInputStream</span>
+<a name="l239"><span class="ln">239  </span></a>            <span class="s1">fis = </span><span class="s2">new </span><span class="s1">FileInputStream(</span><span class="s3">&quot;myFile.txt&quot;</span><span class="s1">)</span><span class="s2">;</span>
+<a name="l240"><span class="ln">240  </span></a>
+<a name="l241"><span class="ln">241  </span></a>
+<a name="l242"><span class="ln">242  </span></a>            <span class="s0">//New InflaterInputStream</span>
+<a name="l243"><span class="ln">243  </span></a>            <span class="s1">iis = </span><span class="s2">new </span><span class="s1">InflaterInputStream(fis)</span><span class="s2">;</span>
+<a name="l244"><span class="ln">244  </span></a>
+<a name="l245"><span class="ln">245  </span></a>            <span class="s2">byte</span><span class="s1">[] result = </span><span class="s2">new byte</span><span class="s1">[</span><span class="s4">1024</span><span class="s1">]</span><span class="s2">;</span>
+<a name="l246"><span class="ln">246  </span></a>            <span class="s2">int </span><span class="s1">length = </span><span class="s4">0</span><span class="s2">;</span>
+<a name="l247"><span class="ln">247  </span></a>
+<a name="l248"><span class="ln">248  </span></a>
+<a name="l249"><span class="ln">249  </span></a>            <span class="s1">ByteArrayOutputStream buffer = </span><span class="s2">new </span><span class="s1">ByteArrayOutputStream()</span><span class="s2">;</span>
+<a name="l250"><span class="ln">250  </span></a>            <span class="s2">if</span><span class="s1">(iis.markSupported()){</span>
+<a name="l251"><span class="ln">251  </span></a>                <span class="s1">iis.mark(</span><span class="s4">0</span><span class="s1">)</span><span class="s2">;</span>
+<a name="l252"><span class="ln">252  </span></a>            <span class="s1">}</span>
+<a name="l253"><span class="ln">253  </span></a>            <span class="s2">if</span><span class="s1">(iis.markSupported()){</span>
+<a name="l254"><span class="ln">254  </span></a>                <span class="s1">iis.reset()</span><span class="s2">;</span>
+<a name="l255"><span class="ln">255  </span></a>            <span class="s1">}</span>
+<a name="l256"><span class="ln">256  </span></a>            <span class="s2">while</span><span class="s1">(iis.available() != </span><span class="s4">0</span><span class="s1">){</span>
+<a name="l257"><span class="ln">257  </span></a>                <span class="s1">buffer.write(iis.read())</span><span class="s2">;</span>
+<a name="l258"><span class="ln">258  </span></a>                <span class="s1">length++</span><span class="s2">;   </span><span class="s0">//Eigen idee; oplossing onbekende argumentgrootte</span>
+<a name="l259"><span class="ln">259  </span></a>            <span class="s1">}</span>
+<a name="l260"><span class="ln">260  </span></a>
+<a name="l261"><span class="ln">261  </span></a>            <span class="s0">//https://www.tutorialspoint.com/javazip/javazip_inflaterinputstream_read.htm gebruikt een gekende boodschaplengte.</span>
+<a name="l262"><span class="ln">262  </span></a>            <span class="s0">// Voor een onbekende hoeveelheid tekst, bufferlengte incrementeren bij iedere gelezen lijn uit de inflateinputstream. Voor</span>
+<a name="l263"><span class="ln">263  </span></a>            <span class="s0">//die lengte (aantal bytes) dan de bufferstroom converteren naar String</span>
+<a name="l264"><span class="ln">264  </span></a>
+<a name="l265"><span class="ln">265  </span></a>
+<a name="l266"><span class="ln">266  </span></a>            <span class="s1">iis.close()</span><span class="s2">;</span>
+<a name="l267"><span class="ln">267  </span></a>            <span class="s1">String message = </span><span class="s2">new </span><span class="s1">String(buffer.toByteArray()</span><span class="s2">,</span><span class="s4">0</span><span class="s2">, </span><span class="s1">length</span><span class="s2">,</span><span class="s3">&quot;UTF-8&quot;</span><span class="s1">)</span><span class="s2">;</span>
+<a name="l268"><span class="ln">268  </span></a>            <span class="s1">System.out.println(message)</span><span class="s2">;</span>
+<a name="l269"><span class="ln">269  </span></a>
+<a name="l270"><span class="ln">270  </span></a>
+<a name="l271"><span class="ln">271  </span></a>
+<a name="l272"><span class="ln">272  </span></a>        <span class="s1">} </span><span class="s2">catch </span><span class="s1">(IOException ex) {</span>
+<a name="l273"><span class="ln">273  </span></a>            <span class="s1">System.out.println(ex.toString())</span><span class="s2">;</span>
+<a name="l274"><span class="ln">274  </span></a>            <span class="s1">System.out.println(</span><span class="s3">&quot;Could not find file &quot; </span><span class="s1">+ fis.getFD())</span><span class="s2">;</span>
+<a name="l275"><span class="ln">275  </span></a>        <span class="s1">}</span>
+<a name="l276"><span class="ln">276  </span></a>
+<a name="l277"><span class="ln">277  </span></a>
+<a name="l278"><span class="ln">278  </span></a>        <span class="s0">//Alternatieve uitlezingsmethode gebasseerd op https://www.inf.unibz.it/~calvanese/teaching/04-05-ip/lecture-notes/uni08/node15.html</span>
+<a name="l279"><span class="ln">279  </span></a>        <span class="s0">//De InflatedInputStream voeden aan een InputStreamReader die een BufferedReader-object voedt.</span>
+<a name="l280"><span class="ln">280  </span></a>        <span class="s0">//Zoalng deze niet leeg is (non-null: ready()) steeds een lijn uit de buffer lezen en omzetten naar een String.</span>
+<a name="l281"><span class="ln">281  </span></a>
+<a name="l282"><span class="ln">282  </span></a>        <span class="s0">/*InputStreamReader isr = new InputStreamReader(iis); 
+<a name="l283"><span class="ln">283  </span></a>        BufferedReader br = new BufferedReader(isr); 
+<a name="l284"><span class="ln">284  </span></a>        while(br.ready()) {         //Eigen idee: .ready() 
+<a name="l285"><span class="ln">285  </span></a>            String line = br.readLine(); 
+<a name="l286"><span class="ln">286  </span></a>            System.out.println(line);*/</span>
+<a name="l287"><span class="ln">287  </span></a>
+<a name="l288"><span class="ln">288  </span></a>        <span class="s1">}</span>
+<a name="l289"><span class="ln">289  </span></a>    <span class="s1">}</span></pre>
+</body>
+</html>
